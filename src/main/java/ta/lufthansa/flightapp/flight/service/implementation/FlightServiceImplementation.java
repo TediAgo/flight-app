@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ta.lufthansa.flightapp.exceptions.NotFoundException;
+import ta.lufthansa.flightapp.exceptions.ServiceException;
 import ta.lufthansa.flightapp.flight.model.dto.FlightDTO;
 import ta.lufthansa.flightapp.flight.model.entity.FlightEntity;
 import ta.lufthansa.flightapp.flight.model.enums.Airport;
@@ -28,7 +30,7 @@ public class FlightServiceImplementation implements FlightService {
     public FlightDTO getFlight(Integer id) {
         if (flightRepository.findById(id).isEmpty() || flightRepository.findById(id).get().getValidity().equals(Boolean.FALSE)) {
             LOGGER.info("Flight not found.");
-            throw new RuntimeException("Flight not found.");
+            throw new NotFoundException("Flight not found.");
         }
         return FlightConverter.convertFlightEntityToDTO(flightRepository.findById(id).get());
     }
@@ -46,7 +48,7 @@ public class FlightServiceImplementation implements FlightService {
     public FlightDTO createFlight(FlightDTO flightDTO) {
         if(flightDTO.getDepartureDate().isAfter(flightDTO.getArrivalDate())) {
             LOGGER.info("Flight Arrival Date should be after Departure Date.");
-            throw new RuntimeException("Flight Arrival Date should be after Departure Date.");
+            throw new ServiceException("Flight Arrival Date should be after Departure Date.");
         }
 
         FlightEntity flight = new FlightEntity();
@@ -64,7 +66,7 @@ public class FlightServiceImplementation implements FlightService {
     public Integer deleteFlight(Integer id) {
         if (flightRepository.findById(id).isEmpty() || flightRepository.findById(id).get().getValidity().equals(Boolean.FALSE)) {
             LOGGER.info("Flight not found.");
-            throw new RuntimeException("Flight not found.");
+            throw new NotFoundException("Flight not found.");
         }
         FlightEntity flight = flightRepository.findById(id).get();
         flight.setValidity(Boolean.FALSE);
@@ -76,7 +78,7 @@ public class FlightServiceImplementation implements FlightService {
     public FlightDTO restoreFlight(Integer id) {
         if (flightRepository.findById(id).isEmpty() || flightRepository.findById(id).get().getValidity().equals(Boolean.TRUE)) {
             LOGGER.info("Flight not found.");
-            throw new RuntimeException("Flight not found.");
+            throw new NotFoundException("Flight not found.");
         }
         FlightEntity flight = flightRepository.findById(id).get();
         flight.setValidity(Boolean.TRUE);

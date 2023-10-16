@@ -105,6 +105,11 @@ public class TripServiceImplementation implements TripService {
 
     @Override
     public TripDTO createTrip(String loggedEmail, TripDTO tripDTO) {
+        if(tripDTO.getDepartureDate().isAfter(tripDTO.getArrivalDate())) {
+            LOGGER.info("Trip Arrival Date should be after Departure Date.");
+            throw new ServiceException("Trip Arrival Date should be after Departure Date.");
+        }
+
         TripEntity trip = new TripEntity();
         trip.setTripReason(TripReason.valueOf(tripDTO.getTripReason()));
         trip.setDescription(tripDTO.getDescription());
