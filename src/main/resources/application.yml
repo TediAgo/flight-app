@@ -6,6 +6,10 @@ spring:
     username: tedi
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+    #url: jdbc:postgresql://localhost:5432/flightapp
+    #username: postgres
+    #password: root
+    #driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,6 +19,8 @@ spring:
         format_sql: true
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
+    #database: postgresql
+    #database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 application:
   security:

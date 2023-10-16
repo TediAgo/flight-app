@@ -20,10 +20,14 @@ public class UserServiceImplementation implements UserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImplementation.class);
 
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository userRepository;
+
+    public UserServiceImplementation(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public UserDTO getUser(Integer id) {
@@ -68,16 +72,4 @@ public class UserServiceImplementation implements UserService {
         userRepository.save(user);
         return UserConverter.convertUserEntityToDTO(user);
     }
-
-    /*@Override
-    public UserDTO createAdmin(Integer id) {
-        if(userRepository.findById(id).isEmpty() || userRepository.findById(id).get().getValidity().equals(Boolean.FALSE)) {
-            LOGGER.info("User not found.");
-            throw new RuntimeException("User not found.");
-        }
-        UserEntity userToAdmin = userRepository.findById(id).get();
-        userToAdmin.setRole(Role.ADMIN);
-        userRepository.save(userToAdmin);
-        return UserConverter.convertUserEntityToDTO(userToAdmin);
-    }*/
 }

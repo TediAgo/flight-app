@@ -1,5 +1,6 @@
 package ta.lufthansa.flightapp.trip.model.dto;
 
+import jakarta.validation.constraints.FutureOrPresent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,9 @@ public class TripDTO {
     private String description;
     private String fromCountry;
     private String toCountry;
+    @FutureOrPresent
     private LocalDateTime departureDate;
+    @FutureOrPresent
     private LocalDateTime arrivalDate;
     private String tripStatus;
     private FlightDTO flight;

@@ -41,7 +41,7 @@ public class TripEntity {
     private TripStatus tripStatus;
     @ManyToOne
     @JoinColumn(name = "flight_id")
-    private FlightEntity flight;
+    private FlightEntity flightEntity;
     @Column(name = "validity")
     private Boolean validity;
 }

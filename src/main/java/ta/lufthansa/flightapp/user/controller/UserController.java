@@ -46,11 +46,4 @@ public class UserController {
     public ResponseEntity<UserDTO> createUser(@Valid @NonNull @RequestBody UserDTO userDTO) {
         return ResponseEntity.ok(userService.createUser(userDTO));
     }
-
-    /*@PostMapping("/createAdmin/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    //@PreAuthorize(value = "hasAnyAuthority('admin:create')")
-    public ResponseEntity<UserDTO> createAdmin(@NonNull @PathVariable (value = "id") Integer id) {
-        return ResponseEntity.ok(userService.createAdmin(id));
-    }*/
 }
