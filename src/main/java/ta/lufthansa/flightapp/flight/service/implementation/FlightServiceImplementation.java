@@ -1,5 +1,6 @@
 package ta.lufthansa.flightapp.flight.service.implementation;
 
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class FlightServiceImplementation implements FlightService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FlightServiceImplementation.class);
 
     @Autowired
-    private FlightRepository flightRepository;
+    private final FlightRepository flightRepository;
 
     @Override
     public FlightDTO getFlight(Integer id) {
@@ -57,22 +59,6 @@ public class FlightServiceImplementation implements FlightService {
         flightRepository.save(flight);
         return FlightConverter.convertFlightEntityToDTO(flight);
     }
-
-    /*@Override
-    public FlightDTO changeFlight(FlightDTO flightDTO) {
-        if (flightRepository.findById(flightDTO.getId()).isEmpty() || flightRepository.findById(flightDTO.getId()).get().getValidity().equals(Boolean.FALSE)) {
-            LOGGER.info("Flight not found.");
-            throw new RuntimeException("Flight not found.");
-        }
-        FlightEntity flight = flightRepository.findById(flightDTO.getId()).get();
-        flight.setFlightNumber(flightDTO.getFlightNumber());
-        flight.setFromAirport(Airport.valueOf(flightDTO.getFromAirport()));
-        flight.setToAirport(Airport.valueOf(flightDTO.getToAirport()));
-        flight.setDepartureDate(flightDTO.getDepartureDate());
-        flight.setArrivalDate(flightDTO.getArrivalDate());
-        flightRepository.save(flight);
-        return FlightConverter.convertFlightEntityToDTO(flight);
-    }*/
 
     @Override
     public Integer deleteFlight(Integer id) {

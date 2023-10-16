@@ -11,8 +11,6 @@ public interface FlightService {
 
     FlightDTO createFlight(FlightDTO flightDTO);
 
-    //FlightDTO changeFlight(FlightDTO flightDTO);
-
     Integer deleteFlight(Integer id);
 
     FlightDTO restoreFlight(Integer id);

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ta.lufthansa.flightapp.flight.model.dto.FlightDTO;
+import ta.lufthansa.flightapp.user.model.dto.UserDTO;
 
 import java.time.LocalDateTime;
 
@@ -23,5 +24,6 @@ public class TripDTO {
     @FutureOrPresent
     private LocalDateTime arrivalDate;
     private String tripStatus;
-    private FlightDTO flight;
+    private FlightDTO flightDTO;
+    private UserDTO userDTO;
 }

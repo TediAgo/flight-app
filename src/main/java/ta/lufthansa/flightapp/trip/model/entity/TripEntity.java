@@ -6,6 +6,7 @@ import ta.lufthansa.flightapp.flight.model.entity.FlightEntity;
 import ta.lufthansa.flightapp.trip.model.enums.Country;
 import ta.lufthansa.flightapp.trip.model.enums.TripReason;
 import ta.lufthansa.flightapp.trip.model.enums.TripStatus;
+import ta.lufthansa.flightapp.user.model.entity.UserEntity;
 
 import java.time.LocalDateTime;
 
@@ -42,6 +43,9 @@ public class TripEntity {
     @ManyToOne
     @JoinColumn(name = "flight_id")
     private FlightEntity flightEntity;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity userEntity;
     @Column(name = "validity")
     private Boolean validity;
 }

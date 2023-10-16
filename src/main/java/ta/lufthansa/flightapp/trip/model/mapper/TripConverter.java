@@ -3,6 +3,7 @@ package ta.lufthansa.flightapp.trip.model.mapper;
 import ta.lufthansa.flightapp.flight.model.mapper.FlightConverter;
 import ta.lufthansa.flightapp.trip.model.dto.TripDTO;
 import ta.lufthansa.flightapp.trip.model.entity.TripEntity;
+import ta.lufthansa.flightapp.user.model.mapper.UserConverter;
 
 public class TripConverter {
 
@@ -18,8 +19,10 @@ public class TripConverter {
         tripDTO.setArrivalDate(tripEntity.getArrivalDate());
         tripDTO.setTripStatus(String.valueOf(tripEntity.getTripStatus()));
 
+        tripDTO.setUserDTO(UserConverter.convertUserEntityToDTO(tripEntity.getUserEntity()));
+
         if(tripEntity.getFlightEntity() != null) {
-            tripDTO.setFlight(FlightConverter.convertFlightEntityToDTO(tripEntity.getFlightEntity()));
+            tripDTO.setFlightDTO(FlightConverter.convertFlightEntityToDTO(tripEntity.getFlightEntity()));
         }
 
         return tripDTO;

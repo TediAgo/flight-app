@@ -5,22 +5,27 @@ import ta.lufthansa.flightapp.trip.model.dto.TripDTO;
 import java.util.List;
 
 public interface TripService {
-    TripDTO getTrip(Integer id);
+    TripDTO getTrip(String loggedEmail, Integer id);
 
     List<TripDTO> getAllTrips();
 
-    TripDTO createTrip(TripDTO tripDTO);
+    List<TripDTO> getAllTripsByReason(String reason);
 
-    TripDTO approvalRequest(Integer tripId);
+    List<TripDTO> getAllTripsByStatus(String status);
+
+    List<TripDTO> getAllTripsByReasonAndStatus(String reason, String status);
+
+    List<TripDTO> getAllMyTrips(String loggedEmail);
+
+    TripDTO createTrip(String loggedEmail, TripDTO tripDTO);
+
+    TripDTO approvalRequest(String loggedEmail, Integer tripId);
 
     TripDTO approveTrip(Integer tripId);
 
-    TripDTO addFlight(Integer tripId, Integer flightId);
-
-    //TripDTO changeTrip(TripDTO tripDTO);
+    TripDTO addFlight(String loggedEmail, Integer tripId, Integer flightId);
 
     Integer deleteTrip(Integer id);
 
     TripDTO restoreTrip(Integer id);
-
 }

@@ -1,10 +1,12 @@
 package ta.lufthansa.flightapp.user.service.implementation;
 
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import ta.lufthansa.flightapp.exceptions.NotFoundException;
 import ta.lufthansa.flightapp.user.model.dto.UserDTO;
 import ta.lufthansa.flightapp.user.model.entity.UserEntity;
 import ta.lufthansa.flightapp.user.model.enums.Role;
@@ -16,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImplementation implements UserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImplementation.class);
@@ -23,17 +26,13 @@ public class UserServiceImplementation implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private UserRepository userRepository;
-
-    public UserServiceImplementation(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
+    private final UserRepository userRepository;
 
     @Override
     public UserDTO getUser(Integer id) {
         if (userRepository.findById(id).isEmpty() || userRepository.findById(id).get().getValidity().equals(Boolean.FALSE)) {
             LOGGER.info("User not found.");
-            throw new RuntimeException("User not found.");
+            throw new NotFoundException("User not found.");
         }
         return UserConverter.convertUserEntityToDTO(userRepository.findById(id).get());
     }

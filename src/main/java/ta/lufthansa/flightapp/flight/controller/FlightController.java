@@ -36,12 +36,6 @@ public class FlightController {
         return ResponseEntity.ok(flightService.createFlight(flightDTO));
     }
 
-    /*@PutMapping("/change")
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<FlightDTO> changeFlight(@Valid @NonNull @RequestBody FlightDTO flightDTO) {
-        return ResponseEntity.ok(flightService.changeFlight(flightDTO));
-    }*/
-
     @DeleteMapping("/{id}/delete")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Integer> deleteFlight(@NonNull @PathVariable(value = "id") Integer id) {
