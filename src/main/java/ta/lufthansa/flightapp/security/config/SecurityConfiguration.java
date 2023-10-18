@@ -44,6 +44,9 @@ public class SecurityConfiguration {
                         "/swagger-ui.html"
                 )
                 .permitAll()
+                /*.requestMatchers("/flights/**").hasAnyRole(ADMIN.name(), USER.name())
+                .requestMatchers(GET, "/flights/{id}").hasAnyRole(ADMIN.name(), USER.name())
+                */
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
